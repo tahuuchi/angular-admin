@@ -1,0 +1,42 @@
+<nz-table [nzData]="listOfData?.data" [nzTotal]="listOfData?.total" [nzPageSize]="listOfData?.limit"
+  [nzPageIndex]="listOfData?.page" [nzPageSizeOptions]="listOfData.selection" [nzShowQuickJumper]="true"
+  [nzShowSizeChanger]="true" [nzFrontPagination]="false" (nzPageIndexChange)="nzPageIndexChange($event)"
+  (nzPageSizeChange)="nzPageSizeChange($event)" #rowSelectionTable>
+  <thead>
+    <tr>
+      <th [nzWidth]="'40px'" [nzChecked]="checked" (nzCheckedChange)="onAllChecked($event)"></th>
+      <ng-container *ngFor="let item of columns">
+        <th *ngIf="item.visible">{{ item.name | translate }}</th>
+      </ng-container>
+      <th nzRight [nzAlign]="'center'">{{ "app.Action" | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of listOfData.data">
+      <td [nzWidth]="'40px'" [nzChecked]="setOfCheckedId.has(data._id)"
+        (nzCheckedChange)="onItemChecked(data._id, $event)"></td>
+      <ng-container *ngFor="let item of columns">
+        <td *ngIf="item.visible">
+          <span *ngIf="item.type === 'check'; else fieldTxt">
+            <ng-container *ngTemplateOutlet="fieldStatus"></ng-container>
+          </span>
+        </td>
+        <ng-template #fieldTxt>
+          {{ getValue(item.field, data) }}
+        </ng-template>
+        <ng-template #fieldStatus>
+          <nz-switch [(ngModel)]="data[item.field]" (ngModelChange)="callBack($event, item.action, data)"></nz-switch>
+        </ng-template>
+      </ng-container>
+      <td nzRight [nzAlign]="'center'">
+        <ng-container *ngFor="let item of actions; let inx = index; let tol = count">
+          <a nz-button [nzSize]="item.size" [nzType]="item.type" [nzDanger]="item.danger" (click)="item.action(data)">
+            <i *ngIf="item.icon" nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+            {{ item.name }}
+          </a>
+          <nz-divider nzType="vertical" *ngIf="inx < (tol - 1)"></nz-divider>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

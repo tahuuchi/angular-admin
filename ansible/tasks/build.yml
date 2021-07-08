@@ -1,0 +1,5 @@
+---
+- name: Build
+  command: "npm run build:{{app_env}}"
+  args:
+    chdir: "{{app_root}}"

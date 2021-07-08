@@ -1,0 +1,21 @@
+<nz-header>
+  <div class="app-header">
+    <span class="header-trigger" (click)="toggle()">
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+    </span>
+    <span class="profile" *ngIf="user">
+      <span nz-dropdown [nzDropdownMenu]="menu">
+        {{ user.fullName || user.email }}
+        <i nz-icon nzType="down"></i>
+      </span>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item>{{ "account.UpdateProfile" | translate }}</li>
+          <li nz-menu-item nzDanger (click)="logout()">
+            {{ "account.Logout" | translate }}
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </span>
+  </div>
+</nz-header>

@@ -1,0 +1,5 @@
+---
+- name: Delete webapp
+  file:
+    path: "{{app_root}}/../public_html"
+    state: absent

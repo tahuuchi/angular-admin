@@ -1,0 +1,45 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <img src="/assets/images/icon.svg" style="width: 70px;" />
+      <a routerLink="/dashboard">
+        <h1>TBN admin</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" *ngIf="menus">
+      <ng-container *ngFor="let menu of menus">
+        <ng-container *ngIf="menu.children.length > 0; else menulink;">
+          <li nz-submenu *ngIf="isViewMenus(menu._id)" [nzTitle]="menu?.title" [nzIcon]="menu?.icon">
+            <ul>
+              <ng-container *ngFor="let children of menu.children">
+                <li nz-menu-item nzMatchRouter *ngIf="isViewMenus(children._id)">
+                  <a [routerLink]="children.path">{{children.title}}</a>
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+
+        <ng-template #menulink>
+          <ng-container *ngIf="isViewMenus(menu._id)">
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
+              <i *ngIf="menu.icon" nz-icon [nzType]="menu.icon"></i>
+              <a [routerLink]="menu.path">{{menu.title}}</a>
+            </li>
+          </ng-container>
+        </ng-template>
+      </ng-container>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <c-header (collapsed)="toggle($event)"></c-header>
+    <nz-content>
+      <div class="inner-content">
+        <nz-spin [nzSpinning]="loader" [nzSize]="'large'" class="custom-loading">
+          <router-outlet></router-outlet>
+        </nz-spin>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

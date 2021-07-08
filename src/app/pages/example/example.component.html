@@ -1,0 +1,17 @@
+<h1>Auto form</h1>
+<auto-form [fields]="fields" [customField]="contentForm"></auto-form>
+<ng-template #contentForm>
+  <div [formGroup]="form" *ngIf="form">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+      <nz-form-control [nzSpan]="14" [nzErrorTip]="errorNewField">
+        <input nz-input formControlName="adnewfield" />
+        <ng-template let-control #errorNewField>
+          <ng-container *ngIf="control.hasError('required')">
+            Please enter field adnewfield
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</ng-template>

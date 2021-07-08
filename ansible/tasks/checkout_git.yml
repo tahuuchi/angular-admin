@@ -1,0 +1,8 @@
+---
+- name: Checkout repository
+  git:
+    repo: "{{app_repo}}"
+    dest: "{{app_root}}"
+    force: true
+    version: "{{app_rev}}"
+    accept_hostkey: true

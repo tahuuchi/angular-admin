@@ -1,0 +1,19 @@
+---
+- hosts: worker
+  vars:
+    username: "{{ansible_user}}"
+    gitlab_user: "{{ lookup('env', 'CI_DEPLOY_USER') }}"
+    gitlab_pass: "{{ lookup('env', 'CI_DEPLOY_PASSWORD') }}"
+
+    app_env: "{{ lookup('env', 'ENV_MODE') | default('dev', true) }}"
+    APP_ENV: "{{ app_env | upper }}"
+    app_repo: "https://{{ gitlab_user }}:{{ gitlab_pass }}@{{ lookup('env', 'GIT_PATH_PREFIX') }}{{ lookup('env', 'APP_NAME') }}.git"
+    app_root: "{{ lookup('env', 'APP_ROOT_' + APP_ENV) }}"
+    app_rev: "{{ lookup('env', 'CI_COMMIT_REF_NAME')  | default('master', true) }}"
+
+  tasks:
+    - include_tasks: tasks/checkout_git.yml
+    - include_tasks: tasks/update_npm.yml
+    - include_tasks: tasks/build.yml
+    - include_tasks: tasks/remove_webapp.yml
+    - include_tasks: tasks/deploy.yml

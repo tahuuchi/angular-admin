@@ -1,0 +1,3 @@
+---
+- name: Deploy
+  command: "mv -f {{app_root}}/dist {{app_root}}/../public_html"

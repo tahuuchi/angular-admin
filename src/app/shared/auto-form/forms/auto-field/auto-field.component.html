@@ -1,0 +1,49 @@
+<div [formGroup]="form">
+  <div [ngSwitch]="field.controlType">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="12" [nzRequired]="field.required || false" [nzFor]="field.key">{{ field.label | translate
+        }}
+      </nz-form-label>
+      <nz-form-control nzDisableAutoTips [nzErrorTip]="errorField">
+        <input *ngSwitchCase="'textbox'" nz-input [formControlName]="field.key" [id]="field.key" [type]="field.type"
+          [(ngModel)]="field.value" [readOnly]="field.readOnly" [class]="field.class" />
+        <nz-input-number *ngSwitchCase="'numberbox'" [formControlName]="field.key" [(ngModel)]="field.value"
+          [nzMin]="field.min" [nzMax]="field.max" [class]="field.class"></nz-input-number>
+        <nz-select *ngSwitchCase="'selectbox'" nzShowSearch nzAllowClear [nzPlaceHolder]="field.placeHolder"
+          (ngModelChange)="onChange($event)" [(ngModel)]="field.value" [formControlName]="field.key"
+          [nzMode]="field?.mode || 'default'" [nzShowArrow]="true">
+          <ng-container *ngFor="let op of field.options">
+            <nz-option *ngIf="!field.loading" [nzLabel]="op.label | translate" [nzValue]="op.value"></nz-option>
+          </ng-container>
+          <nz-option *ngIf="field.loading" nzDisabled nzCustomContent>
+            <i nz-icon nzType="loading" class="loading-icon"></i> Loading
+            Data...
+          </nz-option>
+        </nz-select>
+
+        <textarea *ngSwitchCase="'textarea'" rows="4" nz-input [(ngModel)]="field.value"
+          [formControlName]="field.key"></textarea>
+
+        <label *ngSwitchCase="'checkbox'" nz-checkbox [(ngModel)]="field.checked" [formControlName]="field.key"
+          (ngModelChange)="onChange($event)"></label>
+
+        <nz-checkbox-group *ngSwitchCase="'checkboxGroup'" (ngModelChange)="onChange($event)"
+          [(ngModel)]="field.options" [formControlName]="field.key">
+        </nz-checkbox-group>
+
+        <nz-radio-group *ngSwitchCase="'radioGroup'" [(ngModel)]="field.value" [formControlName]="field.key">
+          <label nz-radio [nzValue]="op.value" *ngFor="let op of field.options">{{ op.label }}</label>
+        </nz-radio-group>
+
+        <nz-date-picker *ngSwitchCase="'datetime'" [nzShowTime]="field.showTime" [nzFormat]="field.formatTime"
+          [(ngModel)]="field.value" (ngModelChange)="onChange($event)" [formControlName]="field.key"></nz-date-picker>
+
+        <ng-template let-control #errorField>
+          <ng-container *ngIf="control.hasError('required')">
+            Please enter field {{ field.label }}
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>

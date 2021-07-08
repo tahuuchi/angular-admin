@@ -1,0 +1,38 @@
+{
+    "account": {
+        "Logout": "Đăng xuất",
+        "UpdateProfile": "Cập nhật thông tin"
+    },
+    "app": {
+        "Action": "Thao tác",
+        "AddSuccess": "Thêm thành công",
+        "Address": "Địa chỉ",
+        "AppName": "Admin TBN",
+        "DeleteSuccess": "Xóa thành công",
+        "Email": "Email",
+        "FullName": "Họ tên",
+        "List": "Danh sách",
+        "Password": "Mật khẩu",
+        "Permission": "Phân quyền",
+        "Phone": "Điện thoại",
+        "Role": "Vai trò",
+        "Status": "Trạng thái",
+        "Title": "Tiêu đề",
+        "UpdateSuccess": "Cập nhật thành công"
+    },
+    "btn": {
+        "AddNew": "Thêm mới",
+        "Back": "Trở về",
+        "Edit": "Chỉnh sửa",
+        "Search": "Tìm kiếm",
+        "Submit": "Submit"
+    },
+    "errorCodes": {
+        "400": "Yêu cầu xảy ra lỗi",
+        "request": "Yêu cầu gửi lên không hợp lệ"
+    },
+    "status": {
+        "0": "Vô hiệu hoá",
+        "1": "Kích hoạt"
+    }
+}

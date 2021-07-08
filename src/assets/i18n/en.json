@@ -1,0 +1,17 @@
+{
+    "app": {
+        "List": "Danh sách",
+        "Status": "Trạng thái",
+        "Title": "Admin dashboard"
+    },
+    "btn": {
+        "AddNew": "Thêm mới",
+        "Edit": "Chỉnh sửa",
+        "Search": "Tìm kiếm",
+        "Submit": "Submit"
+    },
+    "status": {
+        "0": "Vô hiệu hoá",
+        "1": "Kích hoạt"
+    }
+}

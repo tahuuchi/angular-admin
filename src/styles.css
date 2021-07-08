@@ -1,1 +1,23 @@
-/* Add application styles & imports to this file! */
+/* You can add global styles to this file, and also import other style files */
+.custom-loading .ant-spin-spinning {
+  position: fixed;
+  z-index: 99999;
+  background: #ffffff91;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+.custom-loading .ant-spin-spinning .ant-spin-dot {
+  position: relative;
+  top: 50vh;
+}
+.filter-form {
+  border-top: 1px solid #dddddd8f;
+  border-bottom: 1px solid #dddddd8f;
+  padding: 1.5rem 0;
+}
+.ant-page-header {
+  padding: 16px 0;
+}

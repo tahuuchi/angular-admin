@@ -1,0 +1,13 @@
+<nz-page-header [nzTitle]="'app.List' | translate">
+  <nz-page-header-extra>
+    <a nz-button routerLink="/menus/add" nzType="primary">{{
+      "btn.AddNew" | translate
+      }}</a>
+  </nz-page-header-extra>
+</nz-page-header>
+<div class="filter-form">
+  <auto-form [fields]="fields" [col]="6" [layout]="'vertical'" (submitForm)="submitFormSearch($event)"
+    (resetForm)="resetFormSearch()"></auto-form>
+</div>
+<table-list [listOfData]="tableList" [columns]="collumns" [actions]="actions" (onCheckItem)="setChecked($event)">
+</table-list>
